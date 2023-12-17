@@ -7,10 +7,10 @@
         <artifactId>order-management-system</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>infrastructure-layer</artifactId>
+    <artifactId>web-layer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>infrastructure-layer</name>
-    <description>infrastructure-layer</description>
+    <name>web-layer</name>
+    <description>web-layer</description>
 
     <build>
         <plugins>
