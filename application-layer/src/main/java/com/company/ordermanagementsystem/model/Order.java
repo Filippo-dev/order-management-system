@@ -1,5 +1,6 @@
 package com.company.ordermanagementsystem.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -12,9 +13,9 @@ public class Order {
     private OrderStatus status;
     private LocalDateTime orderDateTime;
     private List<OrderItem> items;
-    private double totalAmount;
+    private BigDecimal totalAmount;
 
-    public Order(UUID id, UUID customerId, OrderStatus status, LocalDateTime orderDateTime, List<OrderItem> items, double totalAmount) {
+    public Order(UUID id, UUID customerId, OrderStatus status, LocalDateTime orderDateTime, List<OrderItem> items, BigDecimal totalAmount) {
         this.id = id;
         this.customerId = customerId;
         this.status = status;
@@ -63,11 +64,11 @@ public class Order {
         this.items = items;
     }
 
-    public double getTotalAmount() {
+    public BigDecimal getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(double totalAmount) {
+    public void setTotalAmount(BigDecimal totalAmount) {
         this.totalAmount = totalAmount;
     }
 
@@ -76,12 +77,12 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return Double.compare(totalAmount, order.totalAmount) == 0
-                && Objects.equals(id, order.id)
+        return Objects.equals(id, order.id)
                 && Objects.equals(customerId, order.customerId)
                 && status == order.status
                 && Objects.equals(orderDateTime, order.orderDateTime)
-                && Objects.equals(items, order.items);
+                && Objects.equals(items, order.items)
+                && Objects.equals(totalAmount, order.totalAmount);
     }
 
     @Override

@@ -1,14 +1,15 @@
 package com.company.ordermanagementsystem.model;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
 public class OrderItem {
     private UUID productId;
     private int quantity;
-    private double unitPrice;
+    private BigDecimal unitPrice;
 
-    public OrderItem(UUID productId, int quantity, double unitPrice) {
+    public OrderItem(UUID productId, int quantity, BigDecimal unitPrice) {
         this.productId = productId;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
@@ -30,11 +31,11 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    public double getUnitPrice() {
+    public BigDecimal getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(BigDecimal unitPrice) {
         this.unitPrice = unitPrice;
     }
 
@@ -44,8 +45,8 @@ public class OrderItem {
         if (o == null || getClass() != o.getClass()) return false;
         OrderItem orderItem = (OrderItem) o;
         return quantity == orderItem.quantity
-                && Double.compare(unitPrice, orderItem.unitPrice) == 0
-                && Objects.equals(productId, orderItem.productId);
+                && Objects.equals(productId, orderItem.productId)
+                && Objects.equals(unitPrice, orderItem.unitPrice);
     }
 
     @Override
