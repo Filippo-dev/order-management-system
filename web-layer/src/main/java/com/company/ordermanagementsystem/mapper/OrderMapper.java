@@ -38,7 +38,7 @@ public class OrderMapper {
         return new OrderDTO(order.getId(),
                 order.getCustomerId(),
                 order.getStatus().name(),
-                order.getOrderDateTime(),
+                order.getCreatedAt(),
                 order.getItems().stream()
                         .map(orderItemMapper::toOrderItemDTO)
                         .toList(),

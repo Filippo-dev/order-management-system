@@ -3,7 +3,9 @@ package com.company.ordermanagementsystem.domain.service;
 import com.company.ordermanagementsystem.domain.model.Order;
 import com.company.ordermanagementsystem.domain.model.OrderItem;
 import com.company.ordermanagementsystem.domain.model.OrderStatus;
-import com.company.ordermanagementsystem.port.OrderUseCase;
+import com.company.ordermanagementsystem.port.in.OrderInPort;
+import com.company.ordermanagementsystem.port.out.OrderOutPort;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -13,32 +15,18 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class OrderService implements OrderUseCase {
+public class OrderService implements OrderInPort {
+
+    private final OrderOutPort orderOutPort;
+
+    @Autowired
+    public OrderService(OrderOutPort orderOutPort) {
+        this.orderOutPort = orderOutPort;
+    }
+
     @Override
     public List<Order> getAllOrders() {
-        return List.of(
-                new Order(
-                        UUID.randomUUID(),
-                        OrderStatus.CONFIRMED,
-                        LocalDateTime.of(2021, 1, 1, 12, 0),
-                        List.of(
-                                new OrderItem(UUID.randomUUID(), 1, BigDecimal.valueOf(100.23)),
-                                new OrderItem(UUID.randomUUID(), 1, BigDecimal.valueOf(20.11)),
-                                new OrderItem(UUID.randomUUID(), 3, BigDecimal.valueOf(0.87))
-                        ),
-                        BigDecimal.valueOf(121.32)
-                ),
-                new Order(
-                        UUID.randomUUID(),
-                        OrderStatus.DELIVERED,
-                        LocalDateTime.of(2021, 1, 1, 12, 0),
-                        List.of(
-                                new OrderItem(UUID.randomUUID(), 1, BigDecimal.valueOf(13.78)),
-                                new OrderItem(UUID.randomUUID(), 1, BigDecimal.valueOf(1.11))
-                        ),
-                        BigDecimal.valueOf(14.89)
-                )
-        );
+        return orderOutPort.getAllOrders();
     }
 
     @Override

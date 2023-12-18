@@ -1,4 +1,4 @@
-package com.company.ordermanagementsystem.port;
+package com.company.ordermanagementsystem.port.in;
 
 import com.company.ordermanagementsystem.domain.model.Order;
 
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface OrderUseCase {
+public interface OrderInPort {
 
     List<Order> getAllOrders();
 

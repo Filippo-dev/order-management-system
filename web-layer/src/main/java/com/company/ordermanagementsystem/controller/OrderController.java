@@ -4,7 +4,7 @@ import com.company.ordermanagementsystem.dto.CreateOrderRequest;
 import com.company.ordermanagementsystem.dto.OrderDTO;
 import com.company.ordermanagementsystem.exception.OrderNotFoundException;
 import com.company.ordermanagementsystem.mapper.OrderMapper;
-import com.company.ordermanagementsystem.port.OrderUseCase;
+import com.company.ordermanagementsystem.port.in.OrderInPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,19 +17,19 @@ import java.util.UUID;
 public class OrderController {
 
     private final OrderMapper orderMapper;
-    private final OrderUseCase orderUseCase;
+    private final OrderInPort orderInPort;
 
     @Autowired
-    public OrderController(OrderMapper orderMapper, OrderUseCase orderUseCase) {
+    public OrderController(OrderMapper orderMapper, OrderInPort orderInPort) {
         this.orderMapper = orderMapper;
-        this.orderUseCase = orderUseCase;
+        this.orderInPort = orderInPort;
     }
 
     @GetMapping
     public ResponseEntity<List<OrderDTO>> getAllOrders() {
         return ResponseEntity
                 .status(200)
-                .body(orderUseCase.getAllOrders().stream()
+                .body(orderInPort.getAllOrders().stream()
                         .map(orderMapper::toOrderDTO)
                         .toList());
     }
@@ -38,7 +38,7 @@ public class OrderController {
     public ResponseEntity<OrderDTO> getOrder(@PathVariable UUID id) throws OrderNotFoundException {
         return ResponseEntity
                 .status(200)
-                .body(orderUseCase.getOrderById(id)
+                .body(orderInPort.getOrderById(id)
                         .map(orderMapper::toOrderDTO)
                         .orElseThrow(() -> new OrderNotFoundException(id)));
     }
@@ -47,12 +47,12 @@ public class OrderController {
     public ResponseEntity<UUID> createOrder(@RequestBody CreateOrderRequest createOrderRequest) {
         return ResponseEntity
                 .status(201)
-                .body(orderUseCase.createOrder(orderMapper.toOrder(createOrderRequest)));
+                .body(orderInPort.createOrder(orderMapper.toOrder(createOrderRequest)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOrder(@PathVariable UUID id) {
-        orderUseCase.deleteOrder(id);
+        orderInPort.deleteOrder(id);
         return ResponseEntity
                 .status(204)
                 .build();

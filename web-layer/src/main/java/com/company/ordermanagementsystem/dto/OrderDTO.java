@@ -7,7 +7,7 @@ import java.util.UUID;
 public record OrderDTO(UUID id,
                        UUID customerId,
                        String status,
-                       LocalDateTime orderDateTime,
+                       LocalDateTime createdAt,
                        List<OrderItemDTO> items,
                        double totalAmount) {
 }

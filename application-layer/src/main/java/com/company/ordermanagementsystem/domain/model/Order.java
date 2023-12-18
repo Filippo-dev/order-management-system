@@ -11,14 +11,14 @@ public class Order {
     private UUID id;
     private UUID customerId;
     private OrderStatus status;
-    private LocalDateTime orderDateTime;
+    private LocalDateTime createdAt;
     private List<OrderItem> items;
     private BigDecimal totalAmount;
 
-    public Order(UUID customerId, OrderStatus status, LocalDateTime orderDateTime, List<OrderItem> items, BigDecimal totalAmount) {
+    public Order(UUID customerId, OrderStatus status, LocalDateTime createdAt, List<OrderItem> items, BigDecimal totalAmount) {
         this.customerId = customerId;
         this.status = status;
-        this.orderDateTime = orderDateTime;
+        this.createdAt = createdAt;
         this.items = items;
         this.totalAmount = totalAmount;
     }
@@ -47,12 +47,12 @@ public class Order {
         this.status = status;
     }
 
-    public LocalDateTime getOrderDateTime() {
-        return orderDateTime;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setOrderDateTime(LocalDateTime orderDateTime) {
-        this.orderDateTime = orderDateTime;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
     public List<OrderItem> getItems() {
@@ -79,14 +79,14 @@ public class Order {
         return Objects.equals(id, order.id)
                 && Objects.equals(customerId, order.customerId)
                 && status == order.status
-                && Objects.equals(orderDateTime, order.orderDateTime)
+                && Objects.equals(createdAt, order.createdAt)
                 && Objects.equals(items, order.items)
                 && Objects.equals(totalAmount, order.totalAmount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, customerId, status, orderDateTime, items, totalAmount);
+        return Objects.hash(id, customerId, status, createdAt, items, totalAmount);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Order {
                 "id=" + id +
                 ", customerId=" + customerId +
                 ", status=" + status +
-                ", orderDateTime=" + orderDateTime +
+                ", createdAt=" + createdAt +
                 ", items=" + items +
                 ", totalAmount=" + totalAmount +
                 '}';
