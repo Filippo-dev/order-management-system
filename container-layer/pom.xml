@@ -45,6 +45,13 @@
             <artifactId>inventory-layer</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.company</groupId>
+            <artifactId>web-layer</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
